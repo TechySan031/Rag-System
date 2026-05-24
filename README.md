@@ -280,3 +280,15 @@ All parameters in `backend/app/config.py`:
 5. **Structured failure reasons**: Every failure class includes specific measured values (rerank scores, overlap ratios, match type distributions) rather than generic messages — enabling systematic debugging.
 
 6. **Selection explanations**: Each source includes a human-readable `selection_reason` explaining *why* it was chosen (semantic match, keyword overlap, reranker confirmation) — critical for debugging and trust.
+=======
+title: Rag System
+emoji: 📈
+colorFrom: red
+colorTo: green
+sdk: docker
+pinned: false
+license: mit
+---
+
+Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+>>>>>>> 5f1e4287e7dbef23237c3f85d72991d4b4c5be9d
