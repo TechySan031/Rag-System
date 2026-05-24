@@ -4,7 +4,11 @@ import AnswerDisplay from './components/AnswerDisplay'
 import SourcesPanel from './components/SourcesPanel'
 import DebugPanel from './components/DebugPanel'
 
-const API_BASE = '/api'
+// In dev: /api (Vite proxy). In HF Spaces: empty string (same origin).
+// For separate deployments: full URL like https://rag-backend.onrender.com
+const API_BASE = import.meta.env.VITE_API_URL !== undefined
+  ? import.meta.env.VITE_API_URL
+  : '/api'
 
 function App() {
   const [response, setResponse] = useState(null)

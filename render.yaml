@@ -1,0 +1,53 @@
+# Render Blueprint — deploy both services with one click
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  # --- Backend (FastAPI + ML models) ---
+  - type: web
+    name: rag-backend
+    runtime: python
+    region: oregon
+    plan: starter  # $7/mo — needed for ML models (2GB RAM)
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 2
+    rootDir: backend
+    envVars:
+      - key: RAG_ENV
+        value: prod
+      - key: LOG_DEBUG_SAMPLE_RATE
+        value: "0.1"
+      - key: LLM_TIMEOUT_SECONDS
+        value: "60"
+      - key: PYTHON_VERSION
+        value: "3.13.0"
+      - key: GEMINI_API_KEY
+        sync: false  # set manually in Render dashboard
+      - key: OPENAI_API_KEY
+        sync: false  # set manually in Render dashboard
+    healthCheckPath: /health
+    disk:
+      name: rag-data
+      mountPath: /app/data
+      sizeGB: 1
+
+  # --- Frontend (React static site) ---
+  - type: web
+    name: rag-frontend
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    rootDir: frontend
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: rag-backend
+          type: web
+          envVarKey: RENDER_EXTERNAL_URL
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN

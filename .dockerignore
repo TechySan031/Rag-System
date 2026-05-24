@@ -1,0 +1,21 @@
+# Root .dockerignore for combined HF Spaces build
+.git/
+.gitignore
+*.md
+!README.md
+
+# Backend data (created at runtime)
+backend/chroma_data/
+backend/uploads/
+backend/logs/
+backend/.env
+backend/__pycache__/
+backend/venv/
+
+# Frontend build artifacts
+frontend/node_modules/
+frontend/dist/
+
+# IDE
+.vscode/
+.idea/

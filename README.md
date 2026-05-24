@@ -1,3 +1,15 @@
+---
+title: RAG System
+emoji: ⚡
+colorFrom: indigo
+colorTo: purple
+sdk: docker
+app_port: 7860
+pinned: true
+license: mit
+short_description: Production-grade RAG with hybrid retrieval, reranking, and observability
+---
+
 # Production-Grade RAG System
 
 A complete Retrieval-Augmented Generation system with multi-query retrieval, hybrid search, cross-encoder reranking, confidence scoring, failure classification, grounded generation, evaluation, and full observability — built for AI engineering interviews.
