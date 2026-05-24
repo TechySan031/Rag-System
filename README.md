@@ -7,7 +7,7 @@ sdk: docker
 app_port: 7860
 pinned: true
 license: mit
-short_description: Production-grade RAG with hybrid retrieval, reranking, and observability
+short_description: Advanced RAG with hybrid retrieval and reranking
 ---
 
 # Production-Grade RAG System
