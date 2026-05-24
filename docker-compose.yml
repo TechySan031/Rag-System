@@ -1,0 +1,60 @@
+# ===========================================================
+#  RAG System — Docker Compose (Production)
+#
+#  Services:
+#    backend  — FastAPI + ChromaDB + ML models
+#    frontend — React (Vite build) + Nginx reverse proxy
+#
+#  Usage:
+#    docker-compose up -d --build
+#    docker-compose logs -f backend
+#    docker-compose down
+# ===========================================================
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: rag-backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      - RAG_ENV=prod
+      - LOG_DEBUG_SAMPLE_RATE=0.1
+      - LLM_TIMEOUT_SECONDS=60
+      - LLM_MAX_CONCURRENCY=4
+    volumes:
+      # Persist data across container restarts
+      - rag-chroma:/app/chroma_data
+      - rag-logs:/app/logs
+      - rag-uploads:/app/uploads
+    ports:
+      - "8000:8000"  # Direct API access (optional, can remove in prod)
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s  # ML models take time to load
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: rag-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  rag-chroma:
+    driver: local
+  rag-logs:
+    driver: local
+  rag-uploads:
+    driver: local

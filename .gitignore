@@ -1,0 +1,48 @@
+# ===========================================================
+#  RAG System — .gitignore
+# ===========================================================
+
+# --- SECRETS (NEVER COMMIT) ---
+backend/.env
+.env
+*.env
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+*.whl
+
+# --- Node.js ---
+node_modules/
+frontend/dist/
+
+# --- Data (local only, not versioned) ---
+backend/chroma_data/
+backend/uploads/
+backend/logs/
+
+# --- IDE ---
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Docker ---
+*.log
+
+# --- Model cache (downloaded at runtime) ---
+.cache/

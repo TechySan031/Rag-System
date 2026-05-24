@@ -1,0 +1,30 @@
+# RAG System Backend — Dependencies
+# Core API
+fastapi>=0.115.0
+python-dotenv>=1.0.0
+uvicorn[standard]>=0.34.0
+python-multipart>=0.0.18
+
+# Document parsing
+PyMuPDF>=1.25.0
+
+# Embeddings & Reranking
+sentence-transformers>=4.0.0
+torch>=2.0.0
+
+# Vector store
+chromadb>=1.0.0
+
+# BM25 search
+rank-bm25>=0.2.2
+
+# LLM
+openai>=1.50.0
+
+# Evaluation
+ragas>=0.2.0
+datasets>=2.14.0
+
+# Utilities
+pydantic>=2.0.0
+aiofiles>=24.0.0
