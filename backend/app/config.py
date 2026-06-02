@@ -147,6 +147,15 @@ ALLOWED_EXTENSIONS = {".pdf", ".md", ".markdown", ".txt"}
 OTEL_SERVICE_NAME = os.getenv("OTEL_SERVICE_NAME", "rag-pipeline")
 OTEL_SERVICE_VERSION = os.getenv("OTEL_SERVICE_VERSION", "3.2")
 
+# --- HF Hub Persistence ---
+# Syncs ChromaDB data + uploads to a HF Dataset repo so documents survive
+# container restarts on HF Spaces. Auto-enabled in prod, disabled in dev.
+HF_PERSISTENCE_ENABLED = os.getenv(
+    "HF_PERSISTENCE_ENABLED", "true" if RAG_ENV == "prod" else "false"
+).lower() == "true"
+HF_DATASET_REPO = os.getenv("HF_DATASET_REPO", "saniyamihani/rag-system-data")
+HF_TOKEN = os.getenv("HF_TOKEN", "")
+
 
 # ---------------------------------------------------------------------------
 # Config hash — deterministic fingerprint of all tunable parameters.

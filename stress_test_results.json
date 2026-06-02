@@ -1,0 +1,398 @@
+{
+  "test_type": "latency",
+  "timestamp": "2026-06-02T12:29:14.212717+00:00",
+  "base_url": "https://saniyamihani-rag-system.hf.space",
+  "num_queries": 20,
+  "stats": {
+    "count": 20,
+    "min_ms": 3419.83,
+    "max_ms": 7159.99,
+    "avg_ms": 3999.47,
+    "median_ms": 3833.09,
+    "stdev_ms": 756.5,
+    "p95_ms": 7159.99,
+    "p99_ms": 7159.99
+  },
+  "results": [
+    {
+      "query": "What is the main topic of the document?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 7159.99,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 4623.499042005278,
+        "reranking": 0.01048203557729721,
+        "context_assembly": 0.007084920071065426,
+        "generation": 1423.8013459835202,
+        "confidence": 0.019108993001282215,
+        "classification": 0.027783913537859917
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "Summarize the key points.",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3818.39,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1343.5518119949847,
+        "reranking": 0.010121031664311886,
+        "context_assembly": 0.005449051968753338,
+        "generation": 1451.483615906909,
+        "confidence": 0.016908044926822186,
+        "classification": 0.027430010959506035
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "What are the prerequisites mentioned?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3742.09,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1333.3168639801443,
+        "reranking": 0.008500996045768261,
+        "context_assembly": 0.0044710468500852585,
+        "generation": 1344.752133009024,
+        "confidence": 0.014641904272139072,
+        "classification": 0.020193052478134632
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "How does the system handle errors and edge cases?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3996.54,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1622.4139729747549,
+        "reranking": 0.011501018889248371,
+        "context_assembly": 0.005599926225841045,
+        "generation": 1416.2533530034125,
+        "confidence": 0.013326061889529228,
+        "classification": 0.020202016457915306
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "What is the relationship between the components described?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 4000.06,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1468.7175299040973,
+        "reranking": 0.008897040970623493,
+        "context_assembly": 0.00493205152451992,
+        "generation": 1437.3700680444017,
+        "confidence": 0.015572994016110897,
+        "classification": 0.021950923837721348
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "Compare the advantages and disadvantages mentioned in the document.",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3822.09,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1416.8546249857172,
+        "reranking": 0.009394017979502678,
+        "context_assembly": 0.005456968210637569,
+        "generation": 1393.3157590217888,
+        "confidence": 0.015552970580756664,
+        "classification": 0.021846964955329895
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "Can you explain in detail the process described in the document, including all the steps involved and any specific requirements or conditions that need to be met?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3883.77,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1632.7051830012351,
+        "reranking": 0.009819981642067432,
+        "context_assembly": 0.00516907311975956,
+        "generation": 1323.8651469582692,
+        "confidence": 0.012255040928721428,
+        "classification": 0.01999293453991413
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "What are all the technical specifications, configurations, and parameters mentioned throughout the entire document?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3907.03,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1475.7982830051333,
+        "reranking": 0.012401025742292404,
+        "context_assembly": 0.007963040843605995,
+        "generation": 1373.7080419668928,
+        "confidence": 0.015103025361895561,
+        "classification": 0.02166291233152151
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "Why?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3916.64,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1570.3703339677304,
+        "reranking": 0.011585070751607418,
+        "context_assembly": 0.006007961928844452,
+        "generation": 1393.8675309764221,
+        "confidence": 0.014868914149701595,
+        "classification": 0.023592030629515648
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "Explain.",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3832.94,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1400.4888930357993,
+        "reranking": 0.010570045560598373,
+        "context_assembly": 0.004975008778274059,
+        "generation": 1372.0776489935815,
+        "confidence": 0.015900004655122757,
+        "classification": 0.020807026885449886
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "What algorithms or methods are used?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3735.64,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1376.1427589925006,
+        "reranking": 0.009500072337687016,
+        "context_assembly": 0.004643923602998257,
+        "generation": 1360.4155360953882,
+        "confidence": 0.016647973097860813,
+        "classification": 0.021368032321333885
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "What data formats are supported?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3827.06,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1408.350020996295,
+        "reranking": 0.00947597436606884,
+        "context_assembly": 0.0045959604904055595,
+        "generation": 1387.0981719810516,
+        "confidence": 0.014091026969254017,
+        "classification": 0.03593193832784891
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "How is performance measured?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3645.74,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1403.5032460233197,
+        "reranking": 0.009568058885633945,
+        "context_assembly": 0.027864007279276848,
+        "generation": 1286.8314670631662,
+        "confidence": 0.0159010523930192,
+        "classification": 0.021804007701575756
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "What security considerations are mentioned?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3419.83,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1260.8284100424498,
+        "reranking": 0.008034054189920425,
+        "context_assembly": 0.004780944436788559,
+        "generation": 1187.4267960665748,
+        "confidence": 0.014379969798028469,
+        "classification": 0.01982401590794325
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "What are the limitations of the approach described?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3833.23,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1538.784877047874,
+        "reranking": 0.008980045095086098,
+        "context_assembly": 0.005170004442334175,
+        "generation": 1266.8215580051765,
+        "confidence": 0.019710976630449295,
+        "classification": 0.022771069779992104
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "How does this compare to alternative approaches?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3734.04,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1459.557147929445,
+        "reranking": 0.00987702514976263,
+        "context_assembly": 0.005749054253101349,
+        "generation": 1284.8787859547883,
+        "confidence": 0.01686799805611372,
+        "classification": 0.02050003968179226
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "What future improvements are suggested?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3989.92,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1464.4968949723989,
+        "reranking": 0.018702936358749866,
+        "context_assembly": 0.00967993400990963,
+        "generation": 1479.4585730414838,
+        "confidence": 0.01613795757293701,
+        "classification": 0.028492999263107777
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "List all the tools, libraries, or frameworks mentioned.",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3898.96,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1538.2857490330935,
+        "reranking": 0.008529983460903168,
+        "context_assembly": 0.00451505184173584,
+        "generation": 1311.2029579933733,
+        "confidence": 0.015500001609325409,
+        "classification": 0.02083799336105585
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "What are the exact configuration values and their defaults?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3829.36,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1446.9849680317566,
+        "reranking": 0.009865034371614456,
+        "context_assembly": 0.005424022674560547,
+        "generation": 1287.4677530489862,
+        "confidence": 0.015700003132224083,
+        "classification": 0.01986802089959383
+      },
+      "failure_class": "retrieval_miss"
+    },
+    {
+      "query": "What is not covered in this document?",
+      "status": "success",
+      "status_code": 200,
+      "latency_ms": 3996.16,
+      "confidence_score": 0.0,
+      "confidence_label": "low",
+      "answer_length": 209,
+      "num_sources": 0,
+      "pipeline_latency": {
+        "retrieval": 1659.4014500733465,
+        "reranking": 0.009742914699018002,
+        "context_assembly": 0.005256966687738895,
+        "generation": 1312.724250019528,
+        "confidence": 0.014859950169920921,
+        "classification": 0.020978040993213654
+      },
+      "failure_class": "retrieval_miss"
+    }
+  ]
+}

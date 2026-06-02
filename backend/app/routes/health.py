@@ -12,11 +12,25 @@ router = APIRouter()
 @router.get("/health", response_model=HealthResponse)
 async def health():
     """
-    Returns system health status, document count, and model availability.
+    Returns system health status, document count, model availability,
+    and HF Hub persistence sync status.
     """
     try:
         stats = get_collection_stats()
         llm_provider = get_active_provider()
+
+        # Persistence status
+        persistence_info = {}
+        from app.config import HF_PERSISTENCE_ENABLED
+        if HF_PERSISTENCE_ENABLED:
+            try:
+                from app.core.hf_persistence import get_sync_status
+                persistence_info = get_sync_status()
+            except Exception:
+                persistence_info = {"enabled": True, "status": "import_error"}
+        else:
+            persistence_info = {"enabled": False}
+
         return HealthResponse(
             status="healthy",
             document_count=stats["document_count"],
@@ -27,6 +41,7 @@ async def health():
                 "llm": llm_provider != "none",
                 "llm_provider": llm_provider,
             },
+            persistence=persistence_info,
         )
     except Exception as e:
         return HealthResponse(
@@ -34,4 +49,5 @@ async def health():
             document_count=0,
             collection_name="",
             models_loaded={},
+            persistence={},
         )

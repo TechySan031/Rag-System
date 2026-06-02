@@ -271,7 +271,7 @@ def run_query(query: str) -> QueryResponse:
     # --- Build latency dict from trace ---
     latency = {}
     for s in trace._stages:
-        latency[s.name] = s.latency_ms
+        latency[s.name] = round(s.latency_ms, 2)
 
     # --- Assemble response ---
     retrieved_infos = [_to_chunk_info(c) for c in candidates]
@@ -406,6 +406,16 @@ def ingest_file(filepath: str) -> dict:
 
     # Invalidate query cache (document set changed)
     query_cache.clear()
+
+    # Sync to HF Hub for persistence across restarts (prod only)
+    from app.config import HF_PERSISTENCE_ENABLED
+    if HF_PERSISTENCE_ENABLED:
+        try:
+            from app.core.hf_persistence import sync_to_hub
+            sync_to_hub(uploaded_filepath=filepath)
+        except Exception as e:
+            # Sync failure is non-fatal — log and continue
+            print(f"[persistence] WARNING: Post-upload sync failed: {e}")
 
     duration = _time_ms(t_start)
     log_ingestion(filepath, len(chunks), duration)

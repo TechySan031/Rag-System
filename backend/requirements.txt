@@ -28,3 +28,6 @@ datasets>=2.14.0
 # Utilities
 pydantic>=2.0.0
 aiofiles>=24.0.0
+
+# HF Hub persistence (sync data across HF Spaces restarts)
+huggingface_hub>=0.25.0

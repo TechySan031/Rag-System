@@ -86,7 +86,27 @@ def compute_confidence(
     global _persist_counter
 
     if not reranked_chunks:
-        return {"score": 0.0, "label": "low", "signals": {}, "calibration": _get_calibration()}
+        # Still record in calibration and provide full signal breakdown
+        # so the empty-retrieval case is visible in diagnostics
+        _calibration_window.append(0.0)
+        _persist_counter += 1
+        if _persist_counter >= _PERSIST_INTERVAL:
+            _persist_calibration()
+            _persist_counter = 0
+
+        return {
+            "score": 0.0,
+            "label": "low",
+            "signals": {
+                "score_magnitude": 0.0,
+                "score_spread": 0.0,
+                "retrieval_agreement": 0.0,
+                "cross_query_consistency": round(min(max(query_overlap_ratio, 0.0), 1.0), 4),
+                "support_ratio": 0.0,
+                "reason": "no_reranked_chunks",
+            },
+            "calibration": _get_calibration(),
+        }
 
     # --- Signal 1: Reranker score magnitude (0.0–1.0) ---
     top_score = reranked_chunks[0].get("rerank_score", -10)

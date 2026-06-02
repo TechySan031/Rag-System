@@ -23,10 +23,18 @@ STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 async def lifespan(app: FastAPI):
     """
     Startup/shutdown lifecycle.
-    - On startup: rebuild BM25 index from existing ChromaDB data
-    - On shutdown: cleanup (if needed)
+    - On startup: restore data from HF Hub (if enabled), then rebuild BM25 index
+    - On shutdown: final sync to HF Hub (if enabled)
     """
-    # Startup: rebuild BM25 index from persisted ChromaDB documents
+    # Startup: restore persisted data from HF Hub (before BM25 rebuild)
+    from app.config import HF_PERSISTENCE_ENABLED
+    if HF_PERSISTENCE_ENABLED:
+        from app.core.hf_persistence import restore_from_hub
+        print("[startup] Restoring data from HF Hub...")
+        result = restore_from_hub()
+        print(f"[startup] Restore result: {result.get('status', 'unknown')}")
+
+    # Rebuild BM25 index from (possibly restored) ChromaDB data
     print("[startup] Rebuilding BM25 index from ChromaDB...")
     rebuild_bm25_index()
     print("[startup] BM25 index ready.")
@@ -37,7 +45,11 @@ async def lifespan(app: FastAPI):
         print("[startup] No static frontend found (dev mode — use Vite dev server)")
 
     yield
-    # Shutdown
+    # Shutdown: final sync to ensure latest state is persisted
+    if HF_PERSISTENCE_ENABLED:
+        from app.core.hf_persistence import sync_to_hub
+        print("[shutdown] Final sync to HF Hub...")
+        sync_to_hub()
     print("[shutdown] RAG system shutting down.")
 
 

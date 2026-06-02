@@ -60,3 +60,4 @@ class HealthResponse(BaseModel):
     document_count: int = 0
     collection_name: str = ""
     models_loaded: dict[str, object] = {}
+    persistence: dict[str, object] = {}
