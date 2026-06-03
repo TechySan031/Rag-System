@@ -6,9 +6,9 @@ V3 final polish:
   - Max concurrency control via Semaphore (LLM_MAX_CONCURRENCY, default 4)
   - Timeout on LLM calls (LLM_TIMEOUT_SECONDS, default 120s)
   - Circuit breaker: after N consecutive failures, skip LLM for cooldown period
-  - Supports Ollama (local), Gemini, and OpenAI
+  - Supports Ollama (local), Groq/Llama3, Gemini, and OpenAI
 
-Provider priority: Ollama > Gemini > OpenAI > graceful fallback
+Provider priority: Ollama > Groq > Gemini > OpenAI > graceful fallback
 """
 import os
 import time
@@ -17,7 +17,7 @@ import openai
 from app.config import (
     OPENAI_API_KEY, LLM_MODEL, LLM_TEMPERATURE, LLM_MAX_TOKENS, SYSTEM_PROMPT,
     LLM_TIMEOUT_SECONDS, LLM_CIRCUIT_BREAKER_THRESHOLD, LLM_CIRCUIT_BREAKER_COOLDOWN,
-    LLM_MAX_RETRIES, LLM_MAX_CONCURRENCY,
+    LLM_MAX_RETRIES, LLM_MAX_CONCURRENCY, GROQ_API_KEY, GROQ_MODEL,
 )
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
@@ -188,6 +188,33 @@ def _generate_gemini(user_prompt: str) -> dict:
     }
 
 
+def _generate_groq(user_prompt: str) -> dict:
+    """Generate using Groq API (Llama3 — free, fast, works on HF Spaces)."""
+    client = openai.OpenAI(
+        api_key=GROQ_API_KEY,
+        base_url="https://api.groq.com/openai/v1",
+    )
+    response = client.chat.completions.create(
+        model=GROQ_MODEL,
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_prompt},
+        ],
+        temperature=LLM_TEMPERATURE,
+        max_tokens=LLM_MAX_TOKENS,
+        timeout=LLM_TIMEOUT_SECONDS,
+    )
+    return {
+        "answer": response.choices[0].message.content.strip(),
+        "model": f"groq/{GROQ_MODEL}",
+        "usage": {
+            "prompt_tokens": getattr(response.usage, 'prompt_tokens', 0) or 0,
+            "completion_tokens": getattr(response.usage, 'completion_tokens', 0) or 0,
+            "total_tokens": getattr(response.usage, 'total_tokens', 0) or 0,
+        },
+    }
+
+
 def _check_ollama_available() -> bool:
     """Check if Ollama is running locally."""
     try:
@@ -225,9 +252,11 @@ def _generate_ollama(user_prompt: str) -> dict:
 
 
 def get_active_provider() -> str:
-    """Return which LLM provider is configured. Ollama > Gemini > OpenAI."""
+    """Return which LLM provider is configured. Ollama > Groq > Gemini > OpenAI."""
     if _check_ollama_available():
         return "ollama"
+    if GROQ_API_KEY:
+        return "groq"
     if GEMINI_API_KEY:
         return "gemini"
     if OPENAI_API_KEY:
@@ -243,7 +272,7 @@ def get_circuit_breaker_state() -> dict:
 def generate(query: str, reranked_chunks: list[dict]) -> dict:
     """
     Generate a grounded answer using the best available LLM.
-    Priority: Ollama (local/free) > Gemini > OpenAI > graceful fallback.
+    Priority: Ollama (local/free) > Groq (Llama3/free) > Gemini > OpenAI > graceful fallback.
 
     Includes:
       - Timeout enforcement (LLM_TIMEOUT_SECONDS)
@@ -267,8 +296,9 @@ def generate(query: str, reranked_chunks: list[dict]) -> dict:
             "answer": (
                 "⚠️ No LLM available. Options:\n"
                 "1. Install Ollama (free, local): ollama pull qwen2.5:3b\n"
-                "2. Set GEMINI_API_KEY in .env (free)\n"
-                "3. Set OPENAI_API_KEY in .env (paid)\n\n"
+                "2. Set GROQ_API_KEY in HF Space secrets (free, Llama3)\n"
+                "3. Set GEMINI_API_KEY in HF Space secrets (free)\n"
+                "4. Set OPENAI_API_KEY in HF Space secrets (paid)\n\n"
                 "Retrieval and reranking succeeded. Top chunks:\n\n"
                 f"{chunk_summary}"
             ),
@@ -297,6 +327,8 @@ def generate(query: str, reranked_chunks: list[dict]) -> dict:
     try:
         if provider == "ollama":
             result = _generate_with_retry(_generate_ollama, user_prompt)
+        elif provider == "groq":
+            result = _generate_with_retry(_generate_groq, user_prompt)
         elif provider == "gemini":
             result = _generate_with_retry(_generate_gemini, user_prompt)
         else:

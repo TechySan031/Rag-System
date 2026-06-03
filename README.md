@@ -215,7 +215,7 @@ Every query logs to `backend/logs/rag_queries.jsonl` with:
 ├── backend/
 │   ├── app/
 │   │   ├── main.py                 # FastAPI entry point
-│   │   ├── config.py               # All configuration constants
+│   │   ├──                # All configuration constants
 │   │   ├── models.py               # Pydantic schemas
 │   │   ├── core/
 │   │   │   ├── parser.py           # PDF + Markdown parsing

@@ -95,6 +95,10 @@ LLM_CIRCUIT_BREAKER_COOLDOWN = int(os.getenv("LLM_CIRCUIT_BREAKER_COOLDOWN", "60
 LLM_MAX_RETRIES = int(os.getenv("LLM_MAX_RETRIES", "2"))
 LLM_MAX_CONCURRENCY = int(os.getenv("LLM_MAX_CONCURRENCY", "4"))
 
+# --- Groq (Llama3 — free, works on HF Spaces) ---
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GROQ_MODEL = os.getenv("GROQ_MODEL", "llama3-8b-8192")
+
 SYSTEM_PROMPT = """You are a precise question-answering assistant. Follow these rules strictly:
 
 1. Answer ONLY based on the provided context below. Do not use prior knowledge.

@@ -31,3 +31,5 @@ aiofiles>=24.0.0
 
 # HF Hub persistence (sync data across HF Spaces restarts)
 huggingface_hub>=0.25.0
+
+groq>=0.4.0
