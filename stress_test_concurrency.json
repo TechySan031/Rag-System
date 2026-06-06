@@ -1,0 +1,63 @@
+{
+  "test_type": "concurrency",
+  "timestamp": "2026-06-06T07:17:31.441295+00:00",
+  "base_url": "https://saniyamihani-rag-system.hf.space",
+  "levels": [
+    {
+      "concurrency": 1,
+      "total_requests": 1,
+      "successful": 1,
+      "failed": 0,
+      "success_rate": 100.0,
+      "wall_time_ms": 1274.34,
+      "throughput_rps": 0.78,
+      "min_ms": 1273.58,
+      "max_ms": 1273.58,
+      "avg_ms": 1273.58,
+      "median_ms": 1273.58,
+      "stdev_ms": 0
+    },
+    {
+      "concurrency": 5,
+      "total_requests": 5,
+      "successful": 5,
+      "failed": 0,
+      "success_rate": 100.0,
+      "wall_time_ms": 4784.04,
+      "throughput_rps": 1.05,
+      "min_ms": 4448.71,
+      "max_ms": 4782.21,
+      "avg_ms": 4715.27,
+      "median_ms": 4781.88,
+      "stdev_ms": 149.01
+    },
+    {
+      "concurrency": 10,
+      "total_requests": 10,
+      "successful": 10,
+      "failed": 0,
+      "success_rate": 100.0,
+      "wall_time_ms": 28043.48,
+      "throughput_rps": 0.36,
+      "min_ms": 6022.96,
+      "max_ms": 28041.16,
+      "avg_ms": 15574.13,
+      "median_ms": 14503.29,
+      "stdev_ms": 8325.83
+    },
+    {
+      "concurrency": 20,
+      "total_requests": 20,
+      "successful": 20,
+      "failed": 0,
+      "success_rate": 100.0,
+      "wall_time_ms": 63519.08,
+      "throughput_rps": 0.31,
+      "min_ms": 1395.6,
+      "max_ms": 62873.67,
+      "avg_ms": 21800.04,
+      "median_ms": 11363.61,
+      "stdev_ms": 20437.54
+    }
+  ]
+}
